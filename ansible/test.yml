@@ -1,0 +1,16 @@
+---
+- hosts: webserver
+  become: true
+  become_user: root
+  tasks:
+          - name: Rebooting the cloud server/bare metal box
+            reboot:
+# - name: test web server
+#   hosts: webserver
+#   remote_user: user
+
+#   tasks:
+#   - name: ensure apache is at the latest version
+#     yum:
+#       name: nginx
+#       state: latest
