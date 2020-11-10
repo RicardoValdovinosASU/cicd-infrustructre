@@ -1,6 +1,10 @@
 provider "aws" {
   profile                 = "default"
   region                  = "us-west-1"
+
+  assume_role {
+    role_arn    = "arn:aws:iam::693598974269:role/EC2_Admin"
+  }
 }
 
 variable "vpc_cidr_block" {
