@@ -10,13 +10,22 @@ pipeline {
 
         stage('provision') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'AWSEC2', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
-                    dir('terraform') {
-                        sh 'terraform init'
-                        sh 'terraform plan'
-                        sh 'terraform apply --auto-approve'
+
+                wrappers {
+                    credentialsBinding {
+                        amazonWebServicesCredentialsBinding {
+                        accessKeyVariable("AWS_ACCESS_KEY_ID")
+                        secretKeyVariable("AWS_SECRET_ACCESS_KEY")
+                        credentialsId("your-credentials-id")
+                        }
                     }
                 }
+
+                dir('terraform') {
+                    sh 'terraform init'
+                    sh 'terraform plan'
+                    sh 'terraform apply --auto-approve'
+                } 
             }
         }
         
