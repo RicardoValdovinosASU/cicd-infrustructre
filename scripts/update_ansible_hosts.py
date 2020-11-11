@@ -1,3 +1,4 @@
+import fileinput
 import os
 import re
 import subprocess
@@ -22,9 +23,16 @@ def remove_esc_seq(input_string):
 
 
 def write_new_ip_to_ansible_hosts(aws_public_ip):
-    with open('/etc/ansible/hosts', 'w') as f:
-        update = remove_esc_seq(f'''[webserver]\n{aws_public_ip}''')
-        f.write(update)
+    ansible_hosts = '/etc/ansible/hosts'
+    update = remove_esc_seq(aws_public_ip)
+    reg = r'^\[webserver\]\n\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b$'
+    replace_with = f'[webserver]\n{update}'
+    with open(ansible_hosts, 'r') as f:
+        content = f.read()
+        content_new = re.sub(reg, replace_with, content, flags=re.M)
+
+    with open(ansible_hosts, 'w') as f:
+        f.write(content_new)
 
 
 def delete_output_file():
