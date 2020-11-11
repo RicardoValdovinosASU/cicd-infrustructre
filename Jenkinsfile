@@ -30,12 +30,10 @@ pipeline {
 
         stage('configure') {
             steps {
-                                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'db293874-9c24-432d-81a7-3671751fa1bf', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-
                 dir('ansible') {
-                    sh 'ansible-playbook --private-key=/home/ricky/.aws/AWSEC2.pem -u ec2-user test.yml'
+                    sh 'ansible-playbook -vvvv --private-key=/home/ricky/.aws/AWSEC2.pem -u ec2-user test.yml'
                 }
-            }}
+            }
         }
     }
 }
