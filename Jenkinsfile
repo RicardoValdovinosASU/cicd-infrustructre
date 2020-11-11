@@ -11,9 +11,9 @@ pipeline {
         stage('provision') {
             steps {
                 dir('terraform') {
-                    sh 'terraform --input=false init'
-                    sh 'terraform --input=false plan'
-                    sh 'terraform apply --input=false --auto-approve'
+                    sh 'terraform -input=false init'
+                    sh 'terraform -input=false plan'
+                    sh 'terraform apply -input=false --auto-approve'
                 }
             }
         }
