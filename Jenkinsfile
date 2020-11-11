@@ -31,7 +31,6 @@ pipeline {
         stage('configure') {
             steps {
                 dir('ansible') {
-                    // ansiblePlaybook credentialsId: 'a114dae9-c1ef-42a0-ac97-b072b4fcc165', disableHostKeyChecking: true, playbook: 'test.yml'
                     sh 'sudo ansible-playbook -vvvv --private-key=/home/ricky/.aws/AWSEC2.pem -u ec2-user test.yml'
                 }
             }
