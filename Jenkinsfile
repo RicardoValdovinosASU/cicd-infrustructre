@@ -23,7 +23,7 @@ pipeline {
         stage('update') {
             steps {
                 dir('scripts') {
-                    sh 'sudo python3 update_ansible_hosts.py'
+                    sh 'python3 update_ansible_hosts.py'
                 }
             }
         }
