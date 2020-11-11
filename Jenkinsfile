@@ -12,7 +12,7 @@ pipeline {
             steps {
                 withCredentials([[
                     class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: awsCredentialId,
+                    credentialsId: 'AWSEC2',
                     accessKeyVariable: 'AWS_ACCESS_KEY',
                     secretKeyVariable: 'AWS_SECRET_KEY'
                  ]]) { 
