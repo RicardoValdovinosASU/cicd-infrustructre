@@ -1,6 +1,7 @@
 provider "aws" {
   region  = "us-west-1"
   profile = "default"
+  shared_credentials_file = "/home/ricky/.aws/credentials"
 }
 
 variable "vpc_cidr_block" {
