@@ -10,17 +10,10 @@ pipeline {
 
         stage('provision') {
             steps {
-                withCredentials([[
-                    class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'AWSEC2',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                 ]]) { 
-                    dir('terraform') {
-                        sh 'terraform init'
-                        sh 'terraform plan'
-                        sh 'terraform apply --auto-approve'
-                    }
+                dir('terraform') {
+                    sh 'terraform init'
+                    sh 'terraform plan'
+                    sh 'terraform apply --auto-approve'
                 }
             }
         }
