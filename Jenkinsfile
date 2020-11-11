@@ -10,11 +10,12 @@ pipeline {
 
         stage('provision') {
             steps {
+                                withAWS(credentials: 'AWSEC2', region: 'us-west-1') {
                 dir('terraform') {
                     sh 'terraform init'
                     sh 'terraform plan'
                     sh 'terraform apply --auto-approve'
-                }
+                }}
             }
         }
         
