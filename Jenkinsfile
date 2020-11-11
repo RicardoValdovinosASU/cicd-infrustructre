@@ -32,7 +32,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'a114dae9-c1ef-42a0-ac97-b072b4fcc165', keyFileVariable: 'AWS_SSH_KEY', passphraseVariable: '', usernameVariable: '')]) {
                     dir('ansible') {
-                        sh 'ansible-playbook -vvvv --private-key=/home/ricky/.aws/AWSEC2.pem -u ec2-user test.yml'
+                        sh 'ansible-playbook -vvvv -u ec2-user test.yml'
                     }
                 }
             }
