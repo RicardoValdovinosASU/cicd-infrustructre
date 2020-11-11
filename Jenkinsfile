@@ -10,7 +10,7 @@ pipeline {
 
         stage('provision') {
             steps {
-
+                script {
                 wrappers {
                     credentialsBinding {
                         amazonWebServicesCredentialsBinding {
@@ -25,7 +25,7 @@ pipeline {
                     sh 'terraform init'
                     sh 'terraform plan'
                     sh 'terraform apply --auto-approve'
-                } 
+                } }
             }
         }
         
