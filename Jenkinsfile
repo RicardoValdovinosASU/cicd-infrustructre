@@ -10,17 +10,6 @@ pipeline {
 
         stage('provision') {
             steps {
-                script {
-                wrappers {
-                    credentialsBinding {
-                        amazonWebServicesCredentialsBinding {
-                        accessKeyVariable("AWS_ACCESS_KEY_ID")
-                        secretKeyVariable("AWS_SECRET_ACCESS_KEY")
-                        credentialsId("AWSEC2")
-                        }
-                    }
-                }
-
                 dir('terraform') {
                     sh 'terraform init'
                     sh 'terraform plan'
@@ -32,7 +21,7 @@ pipeline {
         stage('update') {
             steps {
                 dir('scripts') {
-                    sh('sudo python3 update_ansible_hosts.py')
+                    sh 'sudo python3 update_ansible_hosts.py'
                 }
             }
         }
@@ -40,7 +29,7 @@ pipeline {
         stage('configure') {
             steps {
                 dir('ansible') {
-                    sh('ansible-playbook --private-key=/home/ricky/.aws/AWSEC2.pem -u ec2-user test.yml')
+                    sh 'ansible-playbook --private-key=/home/ricky/.aws/AWSEC2.pem -u ec2-user test.yml'
                 }
             }
         }
