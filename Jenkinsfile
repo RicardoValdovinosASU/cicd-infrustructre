@@ -11,9 +11,9 @@ pipeline {
         stage('provision') {
             steps {
                 dir('terraform') {
-                    sh 'terraform init'
-                    sh 'terraform plan'
-                    sh 'terraform apply --auto-approve'
+                    sh '/usr/bin/terraform init'
+                    sh '/usr/bin/terraform plan'
+                    sh '/usr/bin/terraform apply --auto-approve'
                 }
             }
         }
