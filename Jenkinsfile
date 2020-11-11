@@ -17,7 +17,6 @@ pipeline {
                         sh 'terraform apply --auto-approve | tee output'
                     }
                 }
-                }
             }
         }
         
