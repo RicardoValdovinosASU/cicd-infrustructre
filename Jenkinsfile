@@ -11,9 +11,11 @@ pipeline {
         stage('provision') {
             steps {
                 dir('terraform') {
-                    sh 'terraform init'
-                    sh 'terraform plan'
-                    sh 'terraform apply --auto-approve'
+                    withCredentials([usernamePassword(credentialsId: 'AWSEC2', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+                        sh 'terraform init'
+                        sh 'terraform plan'
+                        sh 'terraform apply --auto-approve'
+                    }
                 }
             }
         }
