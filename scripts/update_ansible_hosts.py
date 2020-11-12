@@ -23,7 +23,7 @@ def remove_esc_seq(input_string):
 
 
 def write_new_ip_to_ansible_hosts(aws_public_ip):
-    ansible_hosts = '/etc/ansible/hosts'
+    ansible_hosts = '../ansible/hosts'
     update = remove_esc_seq(aws_public_ip)
     reg = r'^\[webserver\]\n\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b$'
     replace_with = f'[webserver]\n{update}'
