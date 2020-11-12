@@ -3,9 +3,17 @@
   become: true
   become_user: root
   tasks:
-    - name: ensure nginx is at the latest version
-      yum: name=nginx state=latest
-    - name: start nginx
-      service:
-          name: nginx
-          state: started
+    - name: Update system using Yum
+      yum: 
+        name: '*'
+        state: latest
+    - name: Install Docker
+      yum: 
+        name: docker
+        state: present
+        update_cache: true
+    - name: Install Nginx
+      yum: 
+        name: nginx
+        state: present
+        update_cache: true
