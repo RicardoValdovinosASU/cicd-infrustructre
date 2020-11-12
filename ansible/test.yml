@@ -3,5 +3,9 @@
   become: true
   become_user: root
   tasks:
-          - name: Rebooting the cloud server/bare metal box
-            reboot:
+    - name: ensure nginx is at the latest version
+      yum: name=nginx state=latest
+    - name: start nginx
+      service:
+          name: nginx
+          state: started
