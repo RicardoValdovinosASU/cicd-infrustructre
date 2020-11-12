@@ -31,7 +31,7 @@ pipeline {
         stage('configure') {
             steps {
                 dir('ansible') {
-                    sh 'sudo ansible-playbook -i hosts --private-key=/home/ricky/.aws/AWSEC2.pem -u ec2-user test.yml'
+                    sh 'ansible-playbook -i hosts --private-key=/home/ricky/.aws/AWSEC2.pem -u ec2-user test.yml'
                 }
             }
         }
